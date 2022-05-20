@@ -1,2 +1,2 @@
-# python-tests
+# python tests
 Tests en Python
