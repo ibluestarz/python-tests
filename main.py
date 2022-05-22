@@ -1,115 +1,59 @@
 #!/bin/python3
 
-def name(lan):
-    if lan == "EN":
-        prompt = "What is your name ?\n"
-    elif lan == "FR":
-        prompt = "Quel est votre nom ?\n"
-    elif lan == "ES":
-        prompt = "Como te llama ?\n"
-    nom = input(prompt).lower()
-    nom = nom[0].upper() + nom[1:]
-    if nom == "":
-        nom = "Anonymous"
-    return nom
+##############################################################################################################
+##############################################################################################################
 
-def lang():
-    ## Check:
-    langue = "" 
-    while langue not in ["EN","FR","ES"]:
-        langue = input("Choose a language : \nEN for English,\nFR en français,\nES enespañol :\n").upper()
-    ## Fin check
-    nom = name(langue)
+## IMPORT 
+from src.settings import lang, settings, help, info
+import src.settings as cmd_set ## exemple : cmd_set.lang ou cmd_set.settings
+
+##############################################################################################################
+
+## INITIALISATION FONCITONS
+## fonction bye pour dire aurevoir lorsqu'on quitte le programme dans la langue adaptée
+def byelang(langue):
     if langue == "EN":
-        prompt = "Hello"
-    elif langue == "FR":
-        prompt = "Bonjour"
-    elif langue == "ES":
-        prompt = "Hola"
-    print(prompt, nom)
-    return prompt, nom, langue
-
-def byelang(lan):
-    if lan == "EN":
         prompt = "Bye"
-    elif lan == "FR":
+    elif langue == "FR":
         prompt = "Aurevoir"
-    elif lan == "ES":
+    elif langue == "ES":
         prompt = "Ciao"
     return prompt
 
-## Main
-prompt, nom, langue = lang()
+def apl_help(langue):
+    if langue == "FR":
+            print("*** Pour voir la liste des commandes, écrivez : help ***")
+    elif langue == "EN":
+            print("*** To see all commands, type : help ***")
+    elif langue == "ES":
+            print("*** Para ver la lista de comandos, escriba : help ***")
+    return
+
+
+## MAIN
+prompt, nom, langue = lang() ## on rappelle les variables de la fonction 
 cmd = "" 
-settings = ""
-byelang = byelang(langue)
 while cmd != "quit":
     cmd = input(prompt + " " + nom + ": $ ")
 
-    if cmd == "hello":
+## COMMANDES
+    if cmd == "hello": #pour dire bonjour a l'ordinateur
         print(prompt + " " + nom)
-    elif cmd == "settings":
-        if langue == "FR":
-            print("Quel paramètre souhaitez-vous modifier ?\n")
-            settings = input("PROMPT, NAME, LANG \n").upper()
-            if settings == "PROMPT":
-                prompt = input("Ecrivez ce que vous voulez afficher \n")
-            elif settings == "NAME":
-                nom = name(langue)
-            elif settings == "LANG":
-                langue = input("Choisissez un langage : \nEN for English,\nFR en français,\nES enespañol :\n").upper()
-        elif langue == "EN":
-            print("Choose the setting you want to change ? \n")
-            settings = input("PROMPT, NAME, LANG").upper()
-            if settings == "PROMPT":
-                prompt = input("What do you want to display ?\n")
-            elif settings == "NAME":
-                nom = name(langue)
-            elif settings == "LANG":
-                langue = input("Choose a language : \nEN for English,\nFR en français,\nES enespañol :\n").upper()
-        elif langue == "ES":
-            print("¿Qué configuración quieres cambiar? \n")
-            settings = input("PROMPT, NAME, LANG \n").upper()
-            if settings == "PROMPT":
-                prompt = input("Escribe lo que quieres mostrar \n")
-            elif settings == "NAME":
-                nom = name(langue)
-            elif settings == "LANG":
-                langue = input("Elige un idioma : \nEN for English,\nFR en français,\nES enespañol :\n").upper()
+    elif cmd == "settings": #pour modifier les parametres
+        nom, langue, prompt = settings(nom,langue,prompt)   
+    elif cmd == "help": #si l'utilisateur appelle la commande help 
+        help(langue)
+    elif cmd == "info":
+        info(langue,nom,prompt)
+    else: #si l'utilisateur execute une commande qui n'existe pas
+        if cmd != "quit":
+            apl_help(langue)
 
-    elif cmd == "help":
-        if langue == "FR":
-            print(">>> Liste des commandes :") 
-            print("~ hello : L'ordinateur vous salue.")
-            print("~ quit : Permet de quitter le programme, l'ordinateur vous dit aurevoir")
-            print("~ settings : Pour modifier un paramètre")
-            print("~ help : permet d'ouvrir d'afficher les commandes \n")
-
-        elif langue == "EN":
-            print(">>> All commands :")
-            print("~ hello : The computer says hello.")
-            print("~ quit : Leave the program, the computer says goodbye")
-            print("~ settings : To change settings")
-            print("~ help : displays all commands \n")
-
-        elif langue == "ES":
-            print(">>> Lista de comandos :")
-            print("~ hello : la computadora te saluda")
-            print("~ quit : sale del programa, la computadora se despide")
-            print("~ settings : para cambiar la configuración")
-            print("~ help : muestra la lista de commandos \n")
-    else:
-        if langue == "FR":
-            print("*** Pour voir la liste des commandes, écrivez : help ***")
-        elif langue == "EN":
-            print("*** To see all commands, type : help ***")
-        elif langue == "ES":
-            print("*** Para ver la lista de comandos, escriba : help ***")
-
-print(byelang + " " + nom + " !")
+   
+print(byelang(langue) + " " + nom + " !") #si l'utilisateur écrit quit ce message s affiche
 
 
-## Fin main
+## FIN MAIN
 
 
 
