@@ -12,6 +12,15 @@ import src.settings as cmd_set ## exemple : cmd_set.lang ou cmd_set.settings
 ## INITIALISATION FONCITONS
 ## fonction bye pour dire aurevoir lorsqu'on quitte le programme dans la langue adaptée
 def byelang(langue):
+    """
+    It takes a language code as input and returns a goodbye message in that language
+    
+    Args:
+      langue: The language to use.
+    
+    Returns:
+      The prompt is being returned.
+    """
     if langue == "EN":
         prompt = "Bye"
     elif langue == "FR":
@@ -21,6 +30,15 @@ def byelang(langue):
     return prompt
 
 def apl_help(langue):
+    """
+    It prints a message to the user, depending on the language they chose
+    
+    Args:
+      langue: The language in which the help message will be displayed.
+    
+    Returns:
+      the string "help"
+    """
     if langue == "FR":
             print("*** Pour voir la liste des commandes, écrivez : help ***")
     elif langue == "EN":
@@ -33,6 +51,7 @@ def apl_help(langue):
 ## MAIN
 prompt, nom, langue = lang() ## on rappelle les variables de la fonction 
 cmd = "" 
+# A while loop that will keep running until the user types quit.
 while cmd != "quit":
     cmd = input(prompt + " " + nom + ": $ ")
 

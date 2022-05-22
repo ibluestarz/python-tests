@@ -1,5 +1,12 @@
 ## fonction langue
 def lang():
+    """
+    The function lang() asks the user to choose a language, then asks for their name, and then prints a
+    greeting in the chosen language
+    
+    Returns:
+      the prompt, the name and the language.
+    """
     ## Check:
     langue = "" 
     while langue not in ["EN","FR","ES"]: #permet d'afficher le message lorsque l utilisateur n a pas fait de choix
@@ -40,6 +47,21 @@ def name(lan):
 
 ## fonction settings
 def settings(nom,langue,prompt):
+    """
+    The function settings() takes three arguments: nom, langue, and prompt. It then asks the user to
+    choose a setting to change. If the user chooses to change the prompt, the function asks the user to
+    enter a new prompt. If the user chooses to change the name, the function calls the name() function.
+    If the user chooses to change the language, the function asks the user to enter a new language. The
+    function then returns the new values of nom, langue, and prompt
+    
+    Args:
+      nom: the name of the user
+      langue: the language of the program
+      prompt: the prompt that will be displayed when the user is asked to enter a command
+    
+    Returns:
+      the name, the language and the prompt.
+    """
     if langue == "FR":
         print("Quel paramètre souhaitez-vous modifier ?\n")
         settings = input("PROMPT, NAME, LANG \n").upper()
@@ -92,6 +114,15 @@ def settings(nom,langue,prompt):
 
 ## fonction help
 def help(lan):
+    """
+    It displays all the commands available in the program.
+    
+    Args:
+      lan: language
+    
+    Returns:
+      nothing.
+    """
     if lan == "EN":
         print(">>> All commands :")
         print("~ hello : The computer says hello.")
@@ -117,6 +148,19 @@ def help(lan):
 
 ## fonction info 
 def info(langue,nom,prompt):
+    """
+    The function info() takes three arguments: langue, nom, and prompt. 
+    It prints out a message in the language specified by langue, 
+    using the name specified by nom, and the prompt specified by prompt.
+    
+    Args:
+      langue: The language you want to use.
+      nom: The name of the user.
+      prompt: This is the text that is displayed to the user.
+    
+    Returns:
+      the value of the variable "prompt"
+    """
     if langue == "FR":
         print(">> Informations :")
         print("~ Langue : " + langue)
